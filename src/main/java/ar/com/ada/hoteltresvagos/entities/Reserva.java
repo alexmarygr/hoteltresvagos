@@ -28,7 +28,9 @@ public class Reserva {
     private BigDecimal importeTotal;
     @Column(name = "importe_pagado")
     private BigDecimal importePagado;
-    @Column(name = "estado")
+    @Column(name = "falta_pagar")
+    private BigDecimal importeFaltante;
+    @Column(name = "tipo_estado_id")
     private int tipoEstadoId; //Por ahora vamos a crear esto como int 
     @ManyToOne
     @JoinColumn(name = "huesped_id", referencedColumnName = "huesped_id")
@@ -115,6 +117,13 @@ public class Reserva {
         this.huesped.getReservas().add(this);
     }
 
+    public void setImporteFaltante(BigDecimal importeFaltante) {
+        this.importeFaltante = importeFaltante;
+    }
+
+    public BigDecimal getImporteFaltante() {
+        return importeFaltante;
+    }
     //double importe = 0;
     //double importe2 = 1; 
     //double importe3 = importe + importe2; 

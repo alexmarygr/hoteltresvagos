@@ -88,17 +88,9 @@ public class ABM {
         System.out.println("Ingrese el DNI:");
         huesped.setDni(Teclado.nextInt());
         Teclado.nextLine();
-        System.out.println("Ingrese la domicilio:");
-        huesped.setDomicilio(Teclado.nextLine());
+        System.out.println("Ingrese la direccion:");
+        huesped.setDireccion(Teclado.nextLine());
 
-        System.out.println("Ingrese el Domicilio alternativo(OPCIONAL):");
-
-        String domAlternativo = Teclado.nextLine();
-
-        if (domAlternativo != null)
-            huesped.setDomicilioAlternativo(domAlternativo);
-
-                  //Vamos a generar una reserva.
         Reserva reserva = new Reserva();
 
         BigDecimal importeReserva = new BigDecimal(1000);
@@ -109,6 +101,8 @@ public class ABM {
         reserva.setImportePagado(new BigDecimal(0));
 
         reserva.setFechaReserva(new Date()); //Fecha actual
+
+        reserva.setImporteFaltante(new BigDecimal(0));
 
         System.out.println("Ingrese la fecha de ingreso(dd/mm/yy)");
 
@@ -224,15 +218,15 @@ public class ABM {
 
                     break;
                 case 3:
-                    System.out.println("Ingrese el nuevo domicilio:");
+                    System.out.println("Ingrese el nuevo direccion:");
                     Teclado.nextLine();
-                    huespedEncontrado.setDomicilio(Teclado.nextLine());
+                    huespedEncontrado.setDireccion(Teclado.nextLine());
 
                     break;
                 case 4:
-                    System.out.println("Ingrese el nuevo domicilio alternativo:");
+                    System.out.println("Ingrese el nuevo direccion:");
                     Teclado.nextLine();
-                    huespedEncontrado.setDomicilioAlternativo(Teclado.nextLine());
+                    huespedEncontrado.setDireccion(Teclado.nextLine());
 
                     break;
 
@@ -275,12 +269,8 @@ public class ABM {
 
         System.out.print("Id: " + huesped.getHuespedId() + " Nombre: " + huesped.getNombre()
         + " DNI: " + huesped.getDni()
-        + " Domicilio: " + huesped.getDomicilio());
+        + " Direccion: " + huesped.getDireccion());
 
-        if (huesped.getDomicilioAlternativo() != null)
-            System.out.println(" Alternativo: " + huesped.getDomicilioAlternativo());
-        else
-            System.out.println();
     }
 
     public static void printOpciones() {

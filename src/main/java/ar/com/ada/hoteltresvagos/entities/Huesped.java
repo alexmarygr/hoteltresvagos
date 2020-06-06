@@ -19,9 +19,8 @@ public class Huesped {
     private String nombre;
     @NaturalId
     private int dni;
-    private String domicilio;
-    @Column(name = "domicilio_alternativo")
-    private String domicilioAlternativo;
+    private String direccion;
+
 
     @OneToMany(mappedBy = "huesped" ,cascade = CascadeType.ALL)
     private List<Reserva> reservas = new ArrayList<>();
@@ -68,20 +67,12 @@ public class Huesped {
         return "Huesped [dni=" + dni + ", nombre=" + nombre + "]";
     }
 
-    public String getDomicilio() {
-        return domicilio;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setDomicilio(String domicilio) {
-        this.domicilio = domicilio;
-    }
-
-    public String getDomicilioAlternativo() {
-        return domicilioAlternativo;
-    }
-
-    public void setDomicilioAlternativo(String domicilioAlternativo) {
-        this.domicilioAlternativo = domicilioAlternativo;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public List<Reserva> getReservas() {
