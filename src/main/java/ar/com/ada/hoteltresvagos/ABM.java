@@ -94,6 +94,7 @@ public class ABM {
         Reserva reserva = new Reserva();
 
         BigDecimal importeReserva = new BigDecimal(1000);
+
         reserva.setImporteReserva(importeReserva); //Forma 1
        
         reserva.setImporteTotal(new BigDecimal(3000)); //Forma 2
@@ -104,7 +105,7 @@ public class ABM {
 
         reserva.setImporteFaltante(new BigDecimal(0));
 
-        System.out.println("Ingrese la fecha de ingreso(dd/mm/yy)");
+        System.out.println("Ingrese la fecha de ingreso(dd/MM/yy)");
 
         Date fechaIngreso = null;
         Date fechaEgreso = null;
@@ -122,12 +123,12 @@ public class ABM {
         }
 
         //Alternativa de leer fecha a los golpes(puede tirar una excepcion)
-        System.out.println("Ingrese la fecha de egreso(dd/mm/yy)");
+        System.out.println("Ingrese la fecha de egreso(dd/MM/yy)");
         fechaEgreso = dFormat.parse(Teclado.nextLine());
         
         reserva.setFechaIngreso(fechaIngreso); 
         reserva.setFechaEgreso(fechaEgreso); //por ahora 1 dia.
-        reserva.setTipoEstadoId(20); //En mi caso, 20 significa pagado.
+        reserva.setTipoEstadoId(1); //En mi caso, 20 significa pagado.
         reserva.setHuesped(huesped); //Esta es la relacion bidireccional
         
         //Actualizo todos los objeto
@@ -145,9 +146,7 @@ public class ABM {
     }
 
     public void baja() {
-        System.out.println("Ingrese el nombre:");
-        String nombre = Teclado.nextLine();
-        System.out.println("Ingrese el ID de Huesped:");
+        System.out.println("Ingrese el ID de Huesped que desea eliminar:");
         int id = Teclado.nextInt();
         Teclado.nextLine();
         Huesped huespedEncontrado = ABMHuesped.read(id);
@@ -170,9 +169,7 @@ public class ABM {
     }
 
     public void bajaPorDNI() {
-        System.out.println("Ingrese el nombre:");
-        String nombre = Teclado.nextLine();
-        System.out.println("Ingrese el DNI de Huesped:");
+        System.out.println("Ingrese el DNI de Huesped que desea eliminar:");
         int dni = Teclado.nextInt();
         Huesped huespedEncontrado = ABMHuesped.readByDNI(dni);
 
@@ -267,7 +264,7 @@ public class ABM {
 
     public void mostrarHuesped(Huesped huesped) {
 
-        System.out.print("Id: " + huesped.getHuespedId() + " Nombre: " + huesped.getNombre()
+        System.out.print(" Id: " + huesped.getHuespedId() + " Nombre: " + huesped.getNombre()
         + " DNI: " + huesped.getDni()
         + " Direccion: " + huesped.getDireccion());
 

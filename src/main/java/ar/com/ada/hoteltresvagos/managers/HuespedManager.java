@@ -104,6 +104,7 @@ public class HuespedManager {
         // ESTO es solo para nivel educativo
         Query query = session.createNativeQuery("SELECT * FROM huesped", Huesped.class);
         //query = session.createQuery("From Obse")
+        @SuppressWarnings("unchecked")
         List<Huesped> todos = query.getResultList();
 
         return todos;
@@ -126,7 +127,7 @@ public class HuespedManager {
         // si pasamos
         // como nombre: "' or '1'='1"
         Query query = session.createNativeQuery("SELECT * FROM huesped where nombre = '" + nombre + "'", Huesped.class);
-
+        @SuppressWarnings("unchecked")
         List<Huesped> huespedes = query.getResultList();
 
         return huespedes;
