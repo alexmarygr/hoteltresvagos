@@ -14,7 +14,6 @@ public class HuespedDNIException extends HuespedInfoException {
 
     public HuespedDNIException(Huesped huesped, String mensaje) {
         super(huesped, mensaje);
-        // TODO Auto-generated constructor stub
     }
 
 }
