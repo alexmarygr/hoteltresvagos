@@ -72,7 +72,6 @@ public class ABM {
             ABMHuesped.exit();
 
         } catch (Exception e) {
-            // TODO: handle exception
             System.out.println("Que lindo mi sistema,se rompio mi sistema");
             throw e;
         } finally {
