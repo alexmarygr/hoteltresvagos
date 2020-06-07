@@ -11,14 +11,16 @@ import ar.com.ada.hoteltresvagos.entities.Huesped;
 import ar.com.ada.hoteltresvagos.entities.Reserva;
 import ar.com.ada.hoteltresvagos.excepciones.HuespedDNIException;
 import ar.com.ada.hoteltresvagos.managers.HuespedManager;
+import ar.com.ada.hoteltresvagos.managers.ReservaManager;
 
 public class ABM {
 
     public static Scanner Teclado = new Scanner(System.in);
 
     protected HuespedManager ABMHuesped = new HuespedManager();
+    protected ReservaManager ABMReserva = new ReservaManager();
 
-    public void iniciar() throws Exception {
+    public void iniciarHuesped() throws Exception {
 
         try {
 
@@ -264,9 +266,8 @@ public class ABM {
 
     public void mostrarHuesped(Huesped huesped) {
 
-        System.out.print(" Id: " + huesped.getHuespedId() + " Nombre: " + huesped.getNombre()
-        + " DNI: " + huesped.getDni()
-        + " Direccion: " + huesped.getDireccion());
+        System.out.println(" Id: " + huesped.getHuespedId() + " Nombre: " + huesped.getNombre()
+        + " DNI: " + huesped.getDni() + " Direccion: " + huesped.getDireccion());
 
     }
 
@@ -281,5 +282,75 @@ public class ABM {
         System.out.println("0. Para terminar.");
         System.out.println("");
         System.out.println("=======================================");
+    }
+
+    public static void ImprimirOpcionesReserva() {
+        System.out.println("=======================================");
+        System.out.println("");
+        System.out.println("1. Para ver el listado.");
+        System.out.println("2. Buscar una reserva por id reserva.");
+        System.out.println("0. Para terminar.");
+        System.out.println("");
+        System.out.println("=======================================");
+    }
+
+    public void listarReserva(){
+        List<Reserva> todas = ABMReserva.reservaBuscarTodos();
+        for (Reserva r : todas){
+            mostrarReserva(r);
+        }
+    }
+
+    public void mostrarReserva(Reserva reserva) {
+
+        System.out.println(" Id: " + reserva.getReservaId() + " Huesped: " + reserva.getHuesped()
+        + " Fecha Reserva: " + reserva.getFechaReserva() + " Fecha Ingreso: " + reserva.getFechaIngreso()
+        + " Fecha Egreso: " + reserva.getFechaEgreso() + "Importe Total: " + reserva.getImporteTotal()
+        + " Importe Pagado: " + reserva.getImportePagado());
+
+    }
+
+    public void iniciarReserva() throws Exception {
+
+        try {
+
+            ABMReserva.setup();
+
+            ImprimirOpcionesReserva();
+
+            int opcion = Teclado.nextInt();
+            Teclado.nextLine();
+
+            while (opcion > 0) {
+
+                switch (opcion) {
+                    case 1:
+
+                        listarReserva();
+                        break;
+
+
+                    default:
+                        System.out.println("La opcion no es correcta.");
+                        break;
+                }
+
+                ImprimirOpcionesReserva();
+
+                opcion = Teclado.nextInt();
+                Teclado.nextLine();
+            }
+
+            // Hago un safe exit del manager
+            ABMReserva.exit();
+
+        } catch (Exception e) {
+            System.out.println("Que lindo mi sistema,se rompio mi sistema");
+            throw e;
+        } finally {
+            System.out.println("Saliendo del sistema, bye bye...");
+
+        }
+
     }
 }

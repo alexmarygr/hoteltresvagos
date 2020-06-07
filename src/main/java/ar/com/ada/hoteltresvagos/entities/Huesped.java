@@ -17,7 +17,7 @@ public class Huesped {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int huespedId;
     private String nombre;
-    @NaturalId
+    @NaturalId // permite hacer una busqueda con el campo
     private int dni;
     private String direccion;
 

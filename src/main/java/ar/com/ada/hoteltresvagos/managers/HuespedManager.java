@@ -51,7 +51,7 @@ public class HuespedManager {
     public Huesped read(int huespedId) {
         Session session = sessionFactory.openSession();
 
-        Huesped huesped = session.get(Huesped.class, huespedId);
+        Huesped huesped = session.get(Huesped.class, huespedId);//busca en la tabla Huesped a algun huesped que tenga ese id
 
         session.close();
 
@@ -61,7 +61,7 @@ public class HuespedManager {
     public Huesped readByDNI(int dni) {
         Session session = sessionFactory.openSession();
 
-        Huesped huesped = session.byNaturalId(Huesped.class).using("dni", dni).load();
+        Huesped huesped = session.byNaturalId(Huesped.class).using("dni", dni).load();//obtener huesped por el dni
 
         session.close();
 
