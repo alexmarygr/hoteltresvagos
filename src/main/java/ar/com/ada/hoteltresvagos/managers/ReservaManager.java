@@ -85,4 +85,37 @@ public class ReservaManager {
 
     }
 
+    public List<Reserva> buscarPorId(int reservaID) {
+
+        Session session = sessionFactory.openSession();
+
+        // SQL Injection vulnerability exposed.
+        // Deberia traer solo aquella del nombre y con esto demostrarmos que trae todas
+        // si pasamos
+        // como nombre: "' or '1'='1"
+        Query query = session.createNativeQuery("SELECT * FROM reserva where reserva_id = '" + reservaID + "'", Reserva.class);
+        @SuppressWarnings("unchecked")
+        List<Reserva> reservas = query.getResultList();
+
+        return reservas;
+
+    }
+
+
+    public List<Reserva> buscarReservaPorNombreDeHuesped(String nombre) {
+
+        Session session = sessionFactory.openSession();
+
+        // SQL Injection vulnerability exposed.
+        // Deberia traer solo aquella del nombre y con esto demostrarmos que trae todas
+        // si pasamos
+        // como nombre: "' or '1'='1"
+        Query query = session.createNativeQuery("SELECT * FROM reserva r inner join huesped h on r.huesped_id = h.huesped_id where h.nombre = '" + nombre + "'", Reserva.class);
+        @SuppressWarnings("unchecked")
+        List<Reserva> reservasDeHuesped = query.getResultList();
+
+        return reservasDeHuesped;
+
+    }
+
 }

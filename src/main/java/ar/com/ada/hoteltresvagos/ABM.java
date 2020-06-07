@@ -289,6 +289,7 @@ public class ABM {
         System.out.println("");
         System.out.println("1. Para ver el listado.");
         System.out.println("2. Buscar una reserva por id reserva.");
+        System.out.println("3. Buscar una reservas por nombre del huesped.");
         System.out.println("0. Para terminar.");
         System.out.println("");
         System.out.println("=======================================");
@@ -303,9 +304,8 @@ public class ABM {
 
     public void mostrarReserva(Reserva reserva) {
 
-        System.out.println(" Id: " + reserva.getReservaId() + " Huesped: " + reserva.getHuesped()
-        + " Fecha Reserva: " + reserva.getFechaReserva() + " Fecha Ingreso: " + reserva.getFechaIngreso()
-        + " Fecha Egreso: " + reserva.getFechaEgreso() + "Importe Total: " + reserva.getImporteTotal()
+        System.out.println("Reserva nro: " + reserva.getReservaId() + " de " + reserva.getHuesped().getNombre() + " Fecha Ingreso: " + reserva.getFechaIngreso()
+        + " Fecha Egreso: " + reserva.getFechaEgreso() + " Importe Total: " + reserva.getImporteTotal()
         + " Importe Pagado: " + reserva.getImportePagado());
 
     }
@@ -329,6 +329,13 @@ public class ABM {
                         listarReserva();
                         break;
 
+                    case 2:
+                        buscarReservaPorId();
+                        break;
+
+                    case 3:
+                        buscarReservaPorNombreHuesped();
+                        break;
 
                     default:
                         System.out.println("La opcion no es correcta.");
@@ -352,5 +359,27 @@ public class ABM {
 
         }
 
+    }
+
+    public void buscarReservaPorId() {
+
+        System.out.println("Ingrese reservaId:");
+        int numero = Teclado.nextInt();
+
+        List<Reserva> reservas = ABMReserva.buscarPorId(numero);
+        for (Reserva r : reservas) {
+            mostrarReserva(r);
+        }
+    }
+
+    public void buscarReservaPorNombreHuesped() {
+
+        System.out.println("Ingrese el nombre del huesped:");
+        String nombre = Teclado.nextLine();
+
+        List<Reserva> reservas = ABMReserva.buscarReservaPorNombreDeHuesped(nombre);
+        for (Reserva r : reservas) {
+            mostrarReserva(r);
+        }
     }
 }
