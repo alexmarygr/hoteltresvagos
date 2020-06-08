@@ -404,7 +404,7 @@ public class ABM {
 
         System.out.println("Ingrese el importe pagado:"); 
         BigDecimal importePagado = Teclado.nextBigDecimal();
-        reserva.setImporteTotal(importePagado);
+        reserva.setImportePagado(importePagado);
 
         Teclado.nextLine();
 
@@ -451,7 +451,7 @@ public class ABM {
 
         Huesped nuevo = mostarReservaDeHuesped();
         reserva.setHuesped(nuevo);
-
+        
         
         ABMReserva.create(reserva); 
 
@@ -461,11 +461,10 @@ public class ABM {
 
     public Huesped mostarReservaDeHuesped(){
         ABMHuesped.setup();
-        System.out.println("Ingrese el ID de Huesped que desea eliminar:");
+        System.out.println("Ingrese el ID de Huesped que desea agregar la reserva:");
         int id = Teclado.nextInt();
         Teclado.nextLine();
         Huesped huespedEncontrado = ABMHuesped.read(id);
-        ABMHuesped.update(huespedEncontrado);
         return huespedEncontrado;
     }
 
