@@ -406,6 +406,11 @@ public class ABM {
         BigDecimal importePagado = Teclado.nextBigDecimal();
         reserva.setImportePagado(importePagado);
 
+
+        System.out.println("Ingrese el numero de Habitación:"); 
+        Integer nroHab = Teclado.nextInt();
+        reserva.setHabitacion(nroHab);
+
         Teclado.nextLine();
 
         reserva.setImporteFaltante(importeTotal.subtract(importePagado));
