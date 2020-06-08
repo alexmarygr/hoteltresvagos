@@ -32,7 +32,7 @@ public class Reserva {
     private BigDecimal importeFaltante;
     @Column(name = "tipo_estado_id")
     private int tipoEstadoId; //Por ahora vamos a crear esto como int 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "huesped_id", referencedColumnName = "huesped_id")
     private Huesped huesped;
 

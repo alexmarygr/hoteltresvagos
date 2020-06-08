@@ -47,7 +47,6 @@ public class ReservaManager {
         return reserva;
     }
 
-
     public void update(Reserva reserva) {
 
         Session session = sessionFactory.openSession();
@@ -101,7 +100,6 @@ public class ReservaManager {
 
     }
 
-
     public List<Reserva> buscarReservaPorNombreDeHuesped(String nombre) {
 
         Session session = sessionFactory.openSession();
@@ -117,5 +115,15 @@ public class ReservaManager {
         return reservasDeHuesped;
 
     }
+
+	public void create(Reserva reserva) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        session.save(reserva);
+
+        session.getTransaction().commit();
+        session.close();
+	}
 
 }

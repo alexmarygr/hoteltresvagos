@@ -290,6 +290,7 @@ public class ABM {
         System.out.println("1. Para ver el listado.");
         System.out.println("2. Buscar una reserva por id reserva.");
         System.out.println("3. Buscar una reservas por nombre del huesped.");
+        System.out.println("4. Crear reserva.");
         System.out.println("0. Para terminar.");
         System.out.println("");
         System.out.println("=======================================");
@@ -337,6 +338,10 @@ public class ABM {
                         buscarReservaPorNombreHuesped();
                         break;
 
+                    case 4:
+                        altaReserva();
+                        break;
+
                     default:
                         System.out.println("La opcion no es correcta.");
                         break;
@@ -382,4 +387,87 @@ public class ABM {
             mostrarReserva(r);
         }
     }
+
+    public void altaReserva() throws Exception {
+
+        Reserva reserva = new Reserva();
+
+        System.out.println("Ingrese el importe de la reserva:"); 
+        BigDecimal importeReserva = Teclado.nextBigDecimal();
+        reserva.setImporteReserva(importeReserva); //Forma 1
+       
+
+        System.out.println("Ingrese el importe total:"); 
+        BigDecimal importeTotal = Teclado.nextBigDecimal();
+        reserva.setImporteTotal(importeTotal);
+
+
+        System.out.println("Ingrese el importe pagado:"); 
+        BigDecimal importePagado = Teclado.nextBigDecimal();
+        reserva.setImporteTotal(importePagado);
+
+        Teclado.nextLine();
+
+        reserva.setImporteFaltante(importeTotal.subtract(importePagado));
+
+        reserva.setFechaReserva(new Date()); //Fecha actual
+
+        System.out.println("Ingrese la fecha de ingreso(dd/MM/yy)");
+
+        Date fechaIngreso = null;
+        Date fechaEgreso = null;
+
+        DateFormat dFormat = new SimpleDateFormat("dd/MM/yy");
+
+
+        //Alternativa de leer fecha con try catch
+        try{
+            fechaIngreso = dFormat.parse(Teclado.nextLine());
+
+        } catch(Exception ex){
+            System.out.println("Ingreso una fecha invalida.");
+            System.out.println("Vuelva a e empezar");
+            return;
+        }
+        System.out.println("Ingrese la fecha de egreso (dd/MM/yy)");
+        try{
+            fechaEgreso = dFormat.parse(Teclado.nextLine());
+
+        } catch(Exception ex){
+            System.out.println("Ingreso una fecha invalida.");
+            System.out.println("Vuelva a e empezar");
+            return;
+        }
+        
+        reserva.setFechaIngreso(fechaIngreso); 
+        reserva.setFechaEgreso(fechaEgreso); //por ahora 1 dia.
+
+        BigDecimal cero = new BigDecimal(0);
+        if (reserva.getImporteFaltante() == cero){
+            reserva.setTipoEstadoId(1); 
+        } else{
+            reserva.setTipoEstadoId(0);
+        }
+
+        Huesped nuevo = mostarReservaDeHuesped();
+        reserva.setHuesped(nuevo);
+
+        
+        ABMReserva.create(reserva); 
+
+        System.out.println("Reserva generada con exito");
+
+    }
+
+    public Huesped mostarReservaDeHuesped(){
+        ABMHuesped.setup();
+        System.out.println("Ingrese el ID de Huesped que desea eliminar:");
+        int id = Teclado.nextInt();
+        Teclado.nextLine();
+        Huesped huespedEncontrado = ABMHuesped.read(id);
+        ABMHuesped.update(huespedEncontrado);
+        return huespedEncontrado;
+    }
+
+
 }
